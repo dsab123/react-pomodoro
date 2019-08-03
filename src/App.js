@@ -48,7 +48,7 @@ const Display = (props) => {
 
 
 const App = () => {
-    let targetTimeInSeconds = 25 //* 60; // 25 minutes * 60 seconds = 1500
+    let targetTimeInSeconds = 25 * 60; // 25 minutes * 60 seconds = 1500
     //let targetTimeInSeconds = Math.round(24.233 * 60); // this is 24 minutes and 5 seconds 
     const [countdownTime, updateCountdownTime] = React.useState(targetTimeInSeconds)
     
