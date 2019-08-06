@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
 
-const Button = (props) => {
+const PomodoroButton = (props) => {
   return (
-    <button onClick={props.clickHandler}> 
+    <button className={props.className} onClick={props.clickHandler}> 
       {props.text}
     </button>
   );
 }
 
-const Display = (props) => {
+const TimeDisplay = (props) => {
   const [stopTicking, updateStopTicking] = React.useState(false);
   
   // If timer is not stopped or has finished, we continue to count down.
@@ -50,7 +50,7 @@ const Display = (props) => {
   }
 
   return (
-    <div>{remainingMinutes}:{remainingSeconds} left</div>
+    <label>{remainingMinutes}:{remainingSeconds} left</label>
   );
 }
 
@@ -73,14 +73,15 @@ const App = () => {
   }; 
 
   return (
-    <div>
-      <Button text="Start" clickHandler={startTimerHandler} />
-      &nbsp;
-      <Button text="Pause" clickHandler={pauseTimerHandler} />
-      &nbsp;
-      <Button text="Reset" clickHandler={resetTimerHandler} />
-      &nbsp;
-      <Display update={updateCountdownTime} pauseTimer={pauseTimer} targetTime={countdownTime}/>
+    <div className="container">
+      <div className="buttons-container">
+        <PomodoroButton text="Start" className="start-button" clickHandler={startTimerHandler} />
+        &nbsp;
+        <PomodoroButton text="Pause" className="pause-button" clickHandler={pauseTimerHandler} />
+        &nbsp;
+        <PomodoroButton text="Reset" className="reset-button" clickHandler={resetTimerHandler} />
+      </div>
+      <TimeDisplay update={updateCountdownTime} pauseTimer={pauseTimer} targetTime={countdownTime}/>
     </div>
   ); 
 }
