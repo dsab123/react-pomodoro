@@ -23,10 +23,20 @@ const TimeDisplay = (props) => {
     }
   });
   
-  
   let remainingMinutes = Math.floor(props.targetTime / 60);
   let remainingSeconds = props.targetTime % 60;
-  
+
+
+  let createBeep = () => {
+    const context = new AudioContext();
+    const osc = context.createOscillator();
+    const gain = context.createGain();
+    osc.connect(gain);
+    gain.connect(context.destination);
+    gain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 4);
+    osc.start(0);
+  }
+
   if (remainingMinutes < 10) {
     remainingMinutes = '0' + remainingMinutes;
   } else if (remainingMinutes === 0) {
@@ -39,10 +49,13 @@ const TimeDisplay = (props) => {
     remainingSeconds = '00';
   }
 
+  // if targetTime is 0, pomodoro is over
   if (props.targetTime === 0) {
     if (!stopTicking) {
+      createBeep();
       updateStopTicking(true);
     }
+    // need this else to handle reset
   } else if (props.targetTime > 0) {
     if (stopTicking) {
       updateStopTicking(false);
