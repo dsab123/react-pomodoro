@@ -6,6 +6,7 @@ body {
 
 button {
   flex: 1;
+  max-width: 250px;
   font-size: 3em;
   border-radius:10px;
   margin: 2px 5px 2px 5px;
@@ -13,7 +14,6 @@ button {
 
 label {
   font-family: monospace;
-  flex-grow: 1;
   text-align: center;
   font-size: 5em;
 }
@@ -34,19 +34,26 @@ label {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 800px;
-  margin-top: 200px;
-
+  height: 100vh;
 }
 
 .buttons-container {
   display: flex;
   flex-direction: row;
   margin-bottom: 25px;
+  justify-content: center;
 }
 
 @media all and (max-width: 500px) {
   .buttons-container {
     flex-direction: column;
+  }
+
+  .container {
+    height: 80vh;
+  }
+
+  button {
+    max-width: 600px;
   }
 }
